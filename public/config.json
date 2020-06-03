@@ -1,0 +1,106 @@
+{
+    "workflowApiVersion": "1.1",
+    "metaData": {
+        "icon": "images/DTTDigital.png",
+        "iconSmall": "images/DTTDigitalSmall.png",
+        "category": "message"
+    },
+    "type": "REST",
+    "lang": {
+        "en-US": {
+            "name": "DTT Custom Split",
+          "description": "DTT custom Split activity POC",
+          "step1Label": "Configure Activity"
+        }
+    },
+    "arguments": {
+        "execute": {
+           "inArguments":[
+				{
+                    "ContactKey": "{{Contact.Key}}" 
+                }									
+			],
+          "outArguments": [
+          		{
+                    "foundSignupDate": ""
+                }
+          ],
+          //your server domain/url
+          "url": "https://customsplit11.herokuapp.com/journeybuilder/execute",
+           "verb": "POST",
+            "body": "",
+            "header": "",
+            "format": "json",
+            "useJwt": true,
+            "timeout": 10000
+        }
+    },
+    "configurationArguments": {
+    	//your custom components unique key in marketing cloud
+      "applicationExtensionKey": "eb3aa497-89d6-4876-adca-095a4cb7698b",
+      "save": {
+        "url": "https://customsplit11.herokuapp.com/journeybuilder/save",
+          "verb": "POST",
+        "useJwt": true
+       },
+       "publish": {
+        "url": "https://customsplit11.herokuapp.com/journeybuilder/publish",
+           "verb": "POST",
+        "useJwt": true
+       },
+      "stop": {
+        "url": "https://customsplit11.herokuapp.com/journeybuilder/stop",
+           "verb": "POST",
+        "useJwt": true
+      },
+      "validate": {
+        "url": "https://customsplit11.herokuapp.com/journeybuilder/validate",
+        "verb": "POST",
+        "useJwt": true
+      }
+    },
+    "wizardSteps": [
+       { "label": "Step 1", "key": "step1" },
+       { "label": "Step 2", "key": "step2" },
+       { "label": "Step 3", "key": "step3" },
+       { "label": "Step 4", "key": "step4", "active": false }
+    ],
+    "userInterfaces": {
+        "configModal": {
+            "height": 400,
+            "width": 1000,
+          "fullscreen": false
+        }
+    },
+    "schema": {
+        "arguments": {
+            "execute": {
+                "inArguments": [
+                	 {
+                        "phoneNumber": {
+                            "dataType": "Phone",
+                            "isNullable": true,
+                            "direction": "in"   
+                        }
+                    },
+                    {
+                        "emailAddress": {
+                            "dataType": "Email",
+                            "isNullable": true,
+                            "direction": "in"
+                        }
+                    }
+                ],
+                "outArguments": [
+                	 {
+                        "foundSignupDate": {
+                            "dataType": "Date",
+                            "direction": "out",
+                            "access": "visible"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}
